@@ -1,12 +1,25 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import ReactDOM from 'react-dom'; 
+import App from './views/App';
+import reportWebVitals from './reportWebVitals'; 
+import './styles/global.scss';
 
+//ep react khởi động cùng redux
+import {Provider} from 'react-redux'
+import {createStore} from 'redux'
+import rootReducer from './store/reducers/rootReducer'
+
+// const reduxStore= createStore(rootReducer);
+const reduxStore = createStore(rootReducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+      {/* nạo dữ liệu vào redux */}
+    <Provider store={reduxStore}>
+      <App />
+    </Provider>
+    
   </React.StrictMode>,
   document.getElementById('root')
 );
